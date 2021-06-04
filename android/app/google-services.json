@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "707236503477",
+    "project_id": "mvp-assessment",
+    "storage_bucket": "mvp-assessment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707236503477:android:1d18bcfb38c6dc790b43fc",
+        "android_client_info": {
+          "package_name": "com.example.mvp_assessement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707236503477-lteoho5ica99stqco2e4s03f0ooo4n37.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-lBzIO-ZABWREYUyX_e9yN0VXaEpP6J0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707236503477-lteoho5ica99stqco2e4s03f0ooo4n37.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
