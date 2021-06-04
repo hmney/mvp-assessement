@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mvp_assessement/core/app/app_module.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'core/app/app_widget.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+void main() => runApp(ModularApp(module: AppModule(), child: AppWidget()));
