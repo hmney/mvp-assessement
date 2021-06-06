@@ -17,6 +17,7 @@ dependencies:
   flutter_facebook_auth: ^3.4.1
   flutter_mobx: ^2.0.0
   flutter_modular: ^3.2.2+1
+  flutter_native_splash: ^1.1.8+4
   google_sign_in: ^5.0.4
   mobx: ^2.0.1
   phosphor_flutter: ^1.2.0
@@ -30,6 +31,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_native_splash:
+    color: "#ffffff"
+    image: "assets/images/logo.png"
+    android_gravity: center
 
 flutter:
 
@@ -90,3 +95,5 @@ flutter:
         - asset: assets/fonts/Montserrat/Montserrat-ThinItalic.ttf
           style: italic
           weight: 100
+
+  
