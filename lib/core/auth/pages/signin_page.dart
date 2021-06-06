@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mvp_assessement/core/auth/auth_module.dart';
+import 'package:mvp_assessement/core/auth/controllers/auth_controller.dart';
+import 'package:mvp_assessement/core/auth/widgets/auth_page_title_widget.dart';
+import 'package:mvp_assessement/core/auth/widgets/logo_widget.dart';
 import 'package:mvp_assessement/widgets/custom_divider_widget.dart';
 import 'package:mvp_assessement/widgets/custom_elevated_button_widget.dart';
+import 'package:mvp_assessement/widgets/custom_spacer_widget.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class SigninPage extends StatefulWidget {
@@ -36,12 +42,14 @@ class _SigninPageState extends State<SigninPage> {
                           height: 50,
                           alignment: Alignment.centerLeft,
                         ),
-                        _CustomSpacer(
+                        CustomSpacer(
                           flex: 2,
                           minHeight: 20,
                         ),
-                        _SignInTitleWidget(),
-                        _CustomSpacer(
+                        AuthPageTitleWidget(
+                          title: 'Sign in to your account',
+                        ),
+                        CustomSpacer(
                           flex: 1,
                           minHeight: 20,
                         ),
@@ -49,7 +57,7 @@ class _SigninPageState extends State<SigninPage> {
                         SizedBox(height: 20),
                         _PasswordTextFieldWidget(),
                         _ForgetPasswordButtonWidget(),
-                        _CustomSpacer(
+                        CustomSpacer(
                           flex: 2,
                           minHeight: 20,
                         ),
@@ -58,17 +66,17 @@ class _SigninPageState extends State<SigninPage> {
                           label: 'SIGNIN',
                           icon: PhosphorIcons.arrowRightLight,
                         ),
-                        _CustomSpacer(
+                        CustomSpacer(
                           flex: 2,
                           minHeight: 20,
                         ),
                         _SigningWithSocialMediaDividerWidget(),
-                        _CustomSpacer(
+                        CustomSpacer(
                           flex: 1,
                           minHeight: 20,
                         ),
                         _SigninWithSocialMediaButtonsWidget(),
-                        _CustomSpacer(
+                        CustomSpacer(
                           flex: 1,
                           minHeight: 20,
                         ),
@@ -82,30 +90,6 @@ class _SigninPageState extends State<SigninPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class LogoWidget extends StatelessWidget {
-  const LogoWidget({
-    Key? key,
-    required this.width,
-    required this.height,
-    this.alignment,
-  }) : super(key: key);
-
-  final double width;
-  final double height;
-  final AlignmentGeometry? alignment;
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: alignment ?? Alignment.center,
-      child: Image(
-        width: width,
-        height: height,
-        image: AssetImage('assets/images/logo.png'),
       ),
     );
   }
@@ -150,25 +134,6 @@ class _SocialMediaOutlinedButtonWidget extends StatelessWidget {
               height: 24,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _SignInTitleWidget extends StatelessWidget {
-  const _SignInTitleWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final _themeData = Theme.of(context);
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        'Sign in to your account',
-        style: _themeData.textTheme.headline5?.copyWith(
-          color: _themeData.accentColor,
-          fontWeight: FontWeight.w600,
         ),
       ),
     );
@@ -242,6 +207,7 @@ class _SigningWithSocialMediaDividerWidget extends StatelessWidget {
 class _SigninWithSocialMediaButtonsWidget extends StatelessWidget {
   const _SigninWithSocialMediaButtonsWidget({Key? key}) : super(key: key);
 
+  AuthController get _controller => Modular.get<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -249,14 +215,14 @@ class _SigninWithSocialMediaButtonsWidget extends StatelessWidget {
       children: [
         Expanded(
           child: _SocialMediaOutlinedButtonWidget(
-            onPressed: () {},
+            onPressed: () => _controller.signInWithGoogle(),
             label: 'Sign in with Google',
             imagePath: 'assets/images/social_media/google.png',
           ),
         ),
         SizedBox(width: 20),
         _SocialMediaOutlinedButtonWidget(
-          onPressed: () {},
+          onPressed: () => _controller.signInWithFacebook(),
           imagePath: 'assets/images/social_media/facebook.png',
         ),
       ],
@@ -273,28 +239,11 @@ class _CreateNewAccountButtonWidget extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () => AuthModule.toSignupPage(),
         child: Text(
           'Create new account',
           style: TextStyle(fontSize: 16.0),
         ),
-      ),
-    );
-  }
-}
-
-class _CustomSpacer extends StatelessWidget {
-  const _CustomSpacer({Key? key, required this.flex, required this.minHeight})
-      : super(key: key);
-
-  final int flex;
-  final double minHeight;
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: flex,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: minHeight),
       ),
     );
   }
