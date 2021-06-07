@@ -174,7 +174,7 @@ class _ForgetPasswordButtonWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () => AuthModule.toForgotPasswordPage(),
         child: Text('Forgot password?'),
       ),
     );
