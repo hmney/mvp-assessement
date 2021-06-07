@@ -5,13 +5,13 @@ class CustomElevatedButtonWidget extends StatelessWidget {
     Key? key,
     required this.onPressed,
     required this.label,
-    required this.icon,
+    this.icon,
     this.width,
   }) : super(key: key);
 
   final VoidCallback onPressed;
   final String label;
-  final IconData icon;
+  final IconData? icon;
   final double? width;
 
   @override
@@ -26,7 +26,7 @@ class CustomElevatedButtonWidget extends StatelessWidget {
             Spacer(flex: 2),
             Text(label),
             Spacer(flex: 2),
-            Icon(icon),
+            if (icon != null) Icon(icon),
           ],
         ),
       ),
