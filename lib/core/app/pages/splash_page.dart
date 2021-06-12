@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mvp_assessement/core/auth/auth_module.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -6,27 +8,20 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/images/logo.png',
-                width: 360,
-                height: 105,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: 24,
-                height: 24,
-                child: CircularProgressIndicator.adaptive(),
-              )
-            ],
-          ),
-        ),
+      body: FutureBuilder<FirebaseApp>(
+        future: Firebase.initializeApp(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            AuthModule.toAuthPage();
+          }
+          return Center(
+            child: SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator.adaptive(),
+            ),
+          );
+        },
       ),
     );
   }
