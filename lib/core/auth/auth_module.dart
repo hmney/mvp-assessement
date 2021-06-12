@@ -11,13 +11,13 @@ import 'controllers/auth_controller.dart';
 class AuthModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.factory((i) => AuthController()),
-    Bind.factory((i) => AuthRepository()),
+    Bind.singleton((i) => AuthController()),
+    Bind.singleton((i) => AuthRepository()),
   ];
   @override
   final List<ModularRoute> routes = [
     ChildRoute(
-      Modular.initialRoute,
+      AUTH_PAGE,
       child: (context, args) => AuthPage(),
     ),
     ChildRoute(
@@ -38,6 +38,8 @@ class AuthModule extends Module {
     ),
   ];
 
+  static const AUTH_PAGE = '/auth';
+  static Future toAuthPage() => Modular.to.pushReplacementNamed(AUTH_PAGE);
   static const SIGNUP_PAGE = '/signup';
   static Future toSignupPage() => Modular.to.pushNamed(SIGNUP_PAGE);
 
