@@ -32,52 +32,54 @@ class _SignupPageState extends State<SignupPage> {
                   padding:
                       const EdgeInsets.only(top: 10, right: 20.0, left: 20.0),
                   child: IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            LogoWidget(
-                              width: 170,
-                              height: 50,
-                              alignment: Alignment.centerLeft,
-                            ),
-                            IconButton(
-                              onPressed: () => Modular.to.pop(),
-                              icon: Icon(PhosphorIcons.xLight),
-                            ),
-                          ],
-                        ),
-                        CustomSpacer(
-                          flex: 2,
-                          minHeight: 20,
-                        ),
-                        AuthPageTitleWidget(
-                          title: 'Create an account',
-                        ),
-                        CustomSpacer(
-                          flex: 2,
-                          minHeight: 20,
-                        ),
-                        _UsernameTextFieldWidget(),
-                        SizedBox(height: 20),
-                        _EmailTextFieldWidget(),
-                        SizedBox(height: 20),
-                        _PasswordTextFieldWidget(),
-                        _TermAndConditionWidget(),
-                        CustomSpacer(flex: 3, minHeight: 30),
-                        CustomElevatedButtonWidget(
-                          onPressed: () {},
-                          label: 'SIGNUP',
-                          icon: PhosphorIcons.arrowRightLight,
-                        ),
-                        SizedBox(height: 20),
-                        _SigninButtonWidget(),
-                        CustomSpacer(
-                          flex: 3,
-                          minHeight: 30,
-                        ),
-                      ],
+                    child: Form(
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              LogoWidget(
+                                width: 170,
+                                height: 50,
+                                alignment: Alignment.centerLeft,
+                              ),
+                              IconButton(
+                                onPressed: () => Modular.to.pop(),
+                                icon: Icon(PhosphorIcons.xLight),
+                              ),
+                            ],
+                          ),
+                          CustomSpacer(
+                            flex: 2,
+                            minHeight: 20,
+                          ),
+                          AuthPageTitleWidget(
+                            title: 'Create an account',
+                          ),
+                          CustomSpacer(
+                            flex: 2,
+                            minHeight: 20,
+                          ),
+                          _UsernameTextFieldWidget(),
+                          SizedBox(height: 20),
+                          _EmailTextFieldWidget(),
+                          SizedBox(height: 20),
+                          _PasswordTextFieldWidget(),
+                          _TermAndConditionWidget(),
+                          CustomSpacer(flex: 3, minHeight: 30),
+                          CustomElevatedButtonWidget(
+                            onPressed: () {},
+                            label: 'SIGNUP',
+                            icon: PhosphorIcons.arrowRightLight,
+                          ),
+                          SizedBox(height: 20),
+                          _SigninButtonWidget(),
+                          CustomSpacer(
+                            flex: 3,
+                            minHeight: 30,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -95,7 +97,7 @@ class _UsernameTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(labelText: 'Username'),
     );
   }
@@ -106,7 +108,7 @@ class _EmailTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(labelText: 'Email'),
     );
   }
@@ -117,7 +119,7 @@ class _PasswordTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
         labelText: 'Password',
         suffixIcon: Icon(PhosphorIcons.eyeLight),
