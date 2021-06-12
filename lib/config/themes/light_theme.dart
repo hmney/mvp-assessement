@@ -96,7 +96,10 @@ final themeData = ThemeData(
       letterSpacing: 0.0,
     ),
     headline6: TextStyle(
-        fontSize: 20.0, fontWeight: FontWeight.w500, letterSpacing: 0.15),
+      fontSize: 20.0,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.15,
+    ),
     subtitle1: TextStyle(
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
