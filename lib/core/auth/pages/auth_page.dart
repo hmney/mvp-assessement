@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mvp_assessement/core/app/pages/splash_page.dart';
 import 'package:mvp_assessement/core/auth/controllers/auth_controller.dart';
 import 'package:mvp_assessement/core/auth/pages/signin_page.dart';
 import 'package:mvp_assessement/modules/home/pages/home_page.dart';
@@ -27,10 +25,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthController> {
             return HomePage();
           }
         }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SplashPage();
-        }
-        return SplashPage();
+        return SizedBox();
       },
     );
   }
