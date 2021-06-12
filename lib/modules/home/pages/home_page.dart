@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mvp_assessement/core/auth/controllers/auth_controller.dart';
+import 'package:mvp_assessement/modules/home/pages/notifications_page.dart';
+import 'package:mvp_assessement/modules/home/pages/search_page.dart';
+import 'package:mvp_assessement/modules/home/pages/statistics_page.dart';
+import 'package:mvp_assessement/modules/home/pages/projects_page.dart';
+import 'package:mvp_assessement/modules/projects/projects_module.dart';
+import 'package:mvp_assessement/modules/team/pages/team_member_page.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,9 +18,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  int _selectedNavigationItem = 0;
+  static const navigationPages = [
+    ProjectsPage(),
+    TeamMembersPage(),
+    StatisticsPage(),
+    SearchPage(),
+    NotificationsPage(),
+  ];
+
+  void _onSelectedNavigationItemTapped(int index) {
+    setState(() {
+      _selectedNavigationItem = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _themeData = Theme.of(context);
     final AppBar _appBarWidget = AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -25,91 +46,59 @@ class _HomePageState extends State<HomePage> {
           color: Colors.black,
         ),
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20.0),
-          child: Icon(
-            PhosphorIcons.bellLight,
-            color: Colors.black,
-          ),
+    );
+
+    final _bottomNavigationBar = BottomNavigationBar(
+      fixedColor: _themeData.accentColor,
+      selectedIconTheme: IconThemeData(color: _themeData.accentColor),
+      unselectedIconTheme: IconThemeData(color: _themeData.primaryColor),
+      elevation: 8,
+      currentIndex: _selectedNavigationItem,
+      onTap: _onSelectedNavigationItemTapped,
+      showSelectedLabels: true,
+      showUnselectedLabels: false,
+      type: BottomNavigationBarType.shifting,
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(PhosphorIcons.houseSimpleLight),
+          label: 'Home',
+          backgroundColor: Colors.white,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(PhosphorIcons.usersLight),
+          label: 'Team',
+          backgroundColor: Colors.white,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(PhosphorIcons.chartPieSliceLight),
+          label: 'Statistics',
+          backgroundColor: Colors.white,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(PhosphorIcons.magnifyingGlassLight),
+          label: 'Leaves',
+          backgroundColor: Colors.white,
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(PhosphorIcons.bellLight),
+          label: 'Notifications',
+          backgroundColor: Colors.white,
         )
       ],
     );
     return Scaffold(
       key: _scaffoldKey,
       appBar: _appBarWidget,
-      body: null,
-      bottomNavigationBar: _CustomBottomNavigationBarWidget(),
+      body: navigationPages.elementAt(_selectedNavigationItem),
+      bottomNavigationBar: _bottomNavigationBar,
       drawer: _CustomDrwaerWidget(),
       drawerEnableOpenDragGesture: false,
-    );
-  }
-}
-
-class _CustomBottomNavigationBarWidget extends StatefulWidget {
-  const _CustomBottomNavigationBarWidget({Key? key}) : super(key: key);
-
-  @override
-  __CustomBottomNavigationBarWidgetState createState() =>
-      __CustomBottomNavigationBarWidgetState();
-}
-
-class __CustomBottomNavigationBarWidgetState
-    extends State<_CustomBottomNavigationBarWidget> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final _themeData = Theme.of(context);
-    return BottomNavigationBar(
-      backgroundColor: Colors.white,
-      selectedIconTheme: IconThemeData(color: _themeData.accentColor),
-      unselectedIconTheme: IconThemeData(color: _themeData.primaryColor),
-      type: BottomNavigationBarType.fixed,
-      elevation: 0,
-      currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(PhosphorIcons.houseSimpleLight),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(PhosphorIcons.usersLight),
-          label: 'Team',
-        ),
-        BottomNavigationBarItem(
-          icon: Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              color: _themeData.accentColor,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              PhosphorIcons.plusLight,
-              color: Colors.white,
-            ),
-          ),
-          label: 'Add',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(PhosphorIcons.chartPieSliceLight),
-          label: 'Statistics',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(PhosphorIcons.airplaneTiltLight),
-          label: 'Leaves',
-        )
-      ],
+      floatingActionButton: (_selectedNavigationItem == 0)
+          ? FloatingActionButton(
+              onPressed: () => ProjectsModule.toCreateNewProjectPage(),
+              child: Icon(PhosphorIcons.plus),
+            )
+          : null,
     );
   }
 }
